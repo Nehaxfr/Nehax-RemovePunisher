@@ -1,0 +1,10 @@
+{
+    "remove_factory_day": true,
+    "remove_factory_night": true,
+    "remove_customs": true,
+    "remove_reserve": true,
+    "remove_shoreline": true,
+    "remove_interchange": true,
+    "remove_labs": true,
+    "remove_woods": true
+}

@@ -1,0 +1,10 @@
+{
+	"name": "RemovePunisher",
+	"author": "Nehax",
+	"version": "1.0.0",
+	"license": "MIT",
+	"src": {
+		"src/RemovePunisher.js": "CacheModLoad"
+	},
+	"required": []
+}
