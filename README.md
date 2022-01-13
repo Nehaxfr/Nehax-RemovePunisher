@@ -2,4 +2,4 @@
 
 Remove Punisher from waves
 
-![ Alt text](punisher-the-punisher.gif) / ! [](punisher-the-punisher.gif)
+![ Alt text](punisher-the-punisher.gif) [](punisher-the-punisher.gif)
