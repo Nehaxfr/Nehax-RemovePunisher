@@ -1,4 +1,4 @@
-# Nehax-RemovePunisher-1.0.0
+# Nehax-RemovePunisher-1.0.1
 
 Remove Punisher from waves
 
