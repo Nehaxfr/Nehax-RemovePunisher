@@ -1,10 +1,20 @@
 {
 	"name": "RemovePunisher",
 	"author": "Nehax",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"license": "MIT",
 	"src": {
 		"src/RemovePunisher.js": "CacheModLoad"
 	},
-	"required": []
+	"settings": {
+		"showRemoveMessage": false,
+		"removeFrom_customs": true,
+		"removeFrom_factory_day": true,
+		"removeFrom_factory_night": true,
+		"removeFrom_interchange": true,
+		"removeFrom_labs": true,
+		"removeFrom_reserve": true,
+		"removeFrom_shoreline": true,
+		"removeFrom_woods": true
+	}
 }

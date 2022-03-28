@@ -1,71 +1,32 @@
-exports.mod = () => {
-    logger.logSuccess("[MOD] Removing Frank Castle aka Punisher... poor guy...");
-    let cached_location = fileIO.readParsed(db.user.cache.locations)
-    let settings = require("../setting.json");
-    if (settings.remove_factory_day){
-        logger.logSuccess("[MOD] Removing Frank from factory day time")
-        for (let bot_wave of cached_location.factory4_day.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault"
-            }
-        }
-    }
-    if (settings.remove_factory_night){
-        logger.logSuccess("[MOD] Removing Frank from factory night time")
-        for (let bot_wave of cached_location.factory4_night.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault"
-            }
-        }
-    }
-    if (settings.remove_customs){
-        logger.logSuccess("[MOD] Removing Frank from customs")
-        for (let bot_wave of cached_location.bigmap.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault"
-            }
-        }
-    }
-    if (settings.remove_reserve){
-        logger.logSuccess("[MOD] Removing Frank from reserve");
-        for (let bot_wave of cached_location.rezervbase.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault";
-            }
-        }
-    }
-    if (settings.remove_shoreline){
-        logger.logSuccess("[MOD] Removing Frank from shoreline");
-        for (let bot_wave of cached_location.shoreline.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault";
-            }
-        }
-    }
-    if (settings.remove_interchange){
-        logger.logSuccess("[MOD] Removing Frank from interchange");
-        for (let bot_wave of cached_location.interchange.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault";
-            }
-        }
-    }
-    if (settings.laboratory){
-        logger.logSuccess("[MOD] Removing Frank from laboratory");
-        for (let bot_wave of cached_location.laboratory.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault";
-            }
-        }
-    }
-    if (settings.woods){
-        logger.logSuccess("[MOD] Removing Frank from woods");
-        for (let bot_wave of cached_location.woods.base.waves) {
-            if (bot_wave.WildSpawnType == "followerGluharSnipe"){
-                bot_wave.WildSpawnType = "assault";
-            }
-        }
-    }
-    fileIO.write(db.user.cache.locations, cached_location);
+exports.mod = (mod_data) => {
+    logger.logSuccess('[MOD] Removing Frank Castle aka The Punisher... poor guy...');
 
+    let cached_location = fileIO.readParsed(db.user.cache.locations); // Read cached locations.json file
+
+    const mapArray = {
+        removeFrom_customs: 'bigmap',
+        removeFrom_factory_day: 'factory4_day',
+        removeFrom_factory_night: 'factory4_night',
+        removeFrom_interchange: 'interchange',
+        removeFrom_labs: 'laboratory',
+        removeFrom_reserve: 'rezervbase',
+        removeFrom_shoreline: 'shoreline',
+        removeFrom_woods: 'woods'
+    };
+
+    for (const thisMapSetting in mapArray) {
+        const bsgMapName = mapArray[thisMapSetting];
+        if (mod_data.settings[thisMapSetting]) { // If the setting is toggled true
+            for (let bot_wave of cached_location[bsgMapName].base.waves) {
+                if (bot_wave.WildSpawnType == 'followerGluharSnipe') {
+                    bot_wave.WildSpawnType = 'assault' // Replace punisher with a scav
+                }
+            }
+            if (mod_data.settings.showRemoveMessage) {
+                logger.logSuccess('[MOD] Removing Frank from ' + thisMapSetting.replace('removeFrom_', '').replace('_', ' '));
+            }
+        }
+    }
+
+    fileIO.write(db.user.cache.locations, cached_location, true); // Write changes back to cache
 }
